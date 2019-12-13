@@ -19,8 +19,10 @@ A service and UI for creating and running user-designed workflows.
 - `input`: the input data given when the workflow was created
 - `temp`: the temporary data used while the workflow is in a non-FINISHED status
 - `output`: the output data
+- `cache`: cached data used by steps
 - `updated`: when workflow last ran
 - `created`: when workflow was created
+- `scheduled`: the next time this workflow should run
 
 **Step:**
 - `type`: **Step Type**
@@ -38,6 +40,7 @@ A service and UI for creating and running user-designed workflows.
 - `isAsync (workflow: Workflow, step: Step): boolean`
 - `getOutcomes (workflow: Workflow, step: Step): string[]`
 - `getOutcomeScope (workflow: Workflow, step: Step): Type`
+- `getExpressions (workflow: Workflow, step: Step): Expression[]`
 - `execute (workflow: Workflow, step: Step, instance: WorkflowInstance): Promise<string>`
 
 **Watcher:**
@@ -97,6 +100,12 @@ A service and UI for creating and running user-designed workflows.
 **Goto:** (go to step)
 - `step`: Expression (Enum: steps)
 - `outcomes`: []
+
+**Throttle:** (don't execute too often)
+- `frequency`: Expression (Number)
+- `max`: Expression (Number?)
+- `getNextTime`: Expression (Date?)
+- `outcomes`: [run, throttled]
 
 **Fork:** (create a new workflow)
 - `workflow`: Expression (Enum: workflows)
