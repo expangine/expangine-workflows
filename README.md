@@ -5,12 +5,18 @@ A service and UI for creating and running user-designed workflows.
 - `start`: **Step**
 - `steps`: **Step[]**
 - `logs`: **Workflow Log[]**
+- `infos`: **Workflow Info[]**
 - `watchers`: the watchers run concurrently for conditions outside the normal workflow
 - `input`: the (readonly) input type given when the workflow was created
 - `temp`: the temporary type used while the workflow is in a non-FINISHED status
 - `output`: the output type
-- `priority`: Expression (Number)
-- `due`: Expression (Date)
+
+**Workflow Info:** (ex: priority, due)
+- `workflow`: **Workflow**
+- `label`: the label of the info
+- `order`: the order of the info
+- `visibility`: where is this info displayed
+- `getData`: Expression
 
 **Workflow Instance:**
 - `type`: **Workflow**
