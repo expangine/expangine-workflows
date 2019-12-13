@@ -6,15 +6,20 @@ A service and UI for creating and running user-designed workflows.
 - `steps`: **Step[]**
 - `logs`: **Workflow Log[]**
 - `infos`: **Workflow Info[]**
-- `watchers`: the watchers run concurrently for conditions outside the normal workflow
+- `watchers`: **Watcher[]**
+- `visibility`: what parts of the system can see the workflow
+- `name`: the name of the workflow
+- `type`: one of TRIGGER, STANDARD
 - `input`: the (readonly) input type given when the workflow was created
 - `temp`: the temporary type used while the workflow is in a non-FINISHED status
 - `output`: the output type
+- `trigger`: the type for the old/new value for a trigger
 
 **Workflow Info:** (ex: priority, due)
 - `workflow`: **Workflow**
 - `label`: the label of the info
 - `order`: the order of the info
+- `type`: a system type that describes how this info is used
 - `visibility`: where is this info displayed
 - `getData`: Expression
 
@@ -49,7 +54,7 @@ A service and UI for creating and running user-designed workflows.
 - `getExpressions (workflow: Workflow, step: Step): Expression[]`
 - `execute (workflow: Workflow, step: Step, instance: WorkflowInstance): Promise<string>`
 
-**Watcher:**
+**Watcher:** (run concurrently for conditions outside the normal workflow)
 - `schedule`: how often the watcher runs
 - `step`: the step to run each time a watcher is ran
 
