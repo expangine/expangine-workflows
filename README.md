@@ -19,6 +19,7 @@ A workflow more specifically is a collection of steps. Each step has zero or mor
 - **User Decision**: a user manually picks an outcome
 - **User Input**: a user manually enters data and the data is used to update the state of the workflow
 - **Access**: change who can view or perform actions on the workflow instance
+- **Multiple**: execute multiple steps and wait until all or one has processed
 
 Workflows can be developed for commonly performed actions (tweeting) and then invoked as a sub-workflow.
 
@@ -168,3 +169,9 @@ Workflows can be developed for commonly performed actions (tweeting) and then in
 - `rights`: Expression (Enum: View, Act, Pause, Resume, Stop, Delete)
 - `type`: ADD, REMOVE, REPLACE
 - `outcomes`: [granted]
+
+**Multiple:** (execute multiple steps and wait until all or one has processed)
+- `type`: ALL, ONE
+- `steps`: Step[]
+- `mapping`: each step outcome is mapped to a new outcome
+- `outcomes`: *determined by mapping*
