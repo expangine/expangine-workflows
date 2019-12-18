@@ -1,6 +1,29 @@
 # expangine-workflows
 A service and UI for creating and running user-designed workflows.
 
+> A workflow is a sequence of user interactions or automatic processes through which a piece of work passes from initiation to completion.
+
+A workflow more specifically is a collection of steps. Each step has zero or more outcomes, each followed by another step. A workflow is only valid when all outcomes are followed by a step.
+
+#### Steps
+- **Execute**: change the state of the workflow
+- **Email**: send an email to one or more emails
+- **API call**: make a HTTP call to an outside service and process the response
+- **Branch**: analyze the state of the workflow to generate possible outcomes
+- **Pause**: wait until a given date before resuming the workflow
+- **Finish**: the workflow is done
+- **Goto**: goto a specfic step next
+- **Throttle**: control how frequently a step can be ran, to avoid running it too often
+- **Fork**: start another workflow and keep going
+- **Sub**: start another workflow and wait until it completes, analyze the completed state to generate possible outcomes
+- **User Decision**: a user manually picks an outcome
+- **User Input**: a user manually enters data and the data is used to update the state of the workflow
+- **Access**: change who can view or perform actions on the workflow instance
+
+Workflows can be developed for commonly performed actions (tweeting) and then invoked as a sub-workflow.
+
+## API
+
 **Workflow:**
 - `start`: **Step**
 - `steps`: **Step[]**
