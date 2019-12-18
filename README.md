@@ -49,7 +49,8 @@ Workflows can be developed for commonly performed actions (tweeting) and then in
 
 **Workflow Instance:**
 - `type`: **Workflow**
-- `status`: one of WAITING, RUNNING, PAUSED, FINISHED, ERROR, FAILED
+- `status`: one of WAITING, RUNNING, PAUSED, SUCCESS (completed), ERROR, FAILED (completed)
+- `completed_at`: the date it finished
 - `current`: **Step**
 - `input`: the input data given when the workflow was created
 - `temp`: the temporary data used while the workflow is in a non-FINISHED status
@@ -64,9 +65,12 @@ Workflows can be developed for commonly performed actions (tweeting) and then in
 - `name`: the name of the step
 - `icon`: an icon of the step
 - `color`: the color of the step
-- `parent`?: **Step**
-- `parent_outcome`?: the outcome of the parent
-- `outcomes`: one or more outcomes
+- `outcomes`: **Step Outcome[]**
+
+**Step Outcome:**
+- `step`: **Step**
+- `outcome`: string
+- `next`: **Step**
 
 **Step Type:**
 - `name`: the name of the step type
@@ -74,7 +78,7 @@ Workflows can be developed for commonly performed actions (tweeting) and then in
 - `color`: the default color
 - `isAsync (workflow: Workflow, step: Step): boolean`
 - `getOutcomes (workflow: Workflow, step: Step): string[]`
-- `getOutcomeScope (workflow: Workflow, step: Step): Type`
+- `getOutcomeScope (workflow: Workflow, step: Step, outcome: string): Type`
 - `getExpressions (workflow: Workflow, step: Step): Expression[]`
 - `execute (workflow: Workflow, step: Step, instance: WorkflowInstance): Promise<string>`
 
@@ -91,6 +95,7 @@ Workflows can be developed for commonly performed actions (tweeting) and then in
 - `index`: the index of this log in the list of things done to the workflow
 - `actor`: **Actor**
 - `from`: **Step**
+- `outcome`: string
 - `to`: **Step**
 - `created`: when the log was created
 
@@ -136,7 +141,7 @@ Workflows can be developed for commonly performed actions (tweeting) and then in
 - `step`: Expression (Enum: steps)
 - `outcomes`: []
 
-**Throttle:** (don't execute too often)
+**Throttle:** (don't execute too often, max per frequency OR getNextTime)
 - `frequency`: Expression (Number)
 - `max`: Expression (Number?)
 - `getNextTime`: Expression (Date?)
